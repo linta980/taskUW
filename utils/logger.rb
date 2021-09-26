@@ -1,25 +1,29 @@
-
-
-$log_array=[]
+$log_array = []
 
 module Libraries
   class Log
     def self.current_time
-      return "[" +Time.now.localtime.to_s+ "]"
+      return "[" + Time.now.localtime.to_s + "]"
     end
 
     def self.pass(message)
-      time = Log.current_time + "PASS "
-      $log_array.append(time + message)
+      message = Log.current_time + "PASS          " + message
+      $log_array.append(message)
+      puts(message)
+
     end
 
     def self.fail(message)
-      time =Log.current_time + "FAIL "
-      $log_array.append(time + message)
-    end
-    def self.info(message)
-      message = Log.current_time + "INFO    "
+      message = Log.current_time + "FAIL        " + message
       $log_array.append(message)
+      puts(message)
+
+    end
+
+    def self.info(message)
+      message = Log.current_time + "INFO        " + message
+      $log_array.append(message)
+      puts(message)
     end
 
     # To print the file logs
@@ -34,6 +38,7 @@ module Libraries
       $log_array.append(message)
       puts(message)
     end
+
     # To print the test logs
     def self.test(message)
       message = Log.current_time + "TEST      " + message
@@ -44,7 +49,7 @@ module Libraries
 end
 
 at_exit {
-  File.open("reports/logs/log.txt", "w") do  |f|
+  File.open("reports/logs/log.txt", "w") do |f|
     f.write "Test started at #{Time.now.localtime.to_s} "
   end
 }
