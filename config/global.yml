@@ -3,10 +3,6 @@
 # A capability is added to specify this prams as an environment variable and use the same within the tests
 # Params declared as environment variables gets higher preference over the prams mentioned in this file
 browser: chrome
-headless: false
-screen_horizontal: 1280
-screen_vertical: 800
 implicit_wait: 10
-screenshot_location: reports/screenshots
 url: https://www.upwork.com/
 

@@ -1,9 +1,9 @@
-include Libraries
+
 require_relative '../utils/locators'
 
 module Libraries
   module Wait
-    class << self
+    class << self #<<self means that we do not need to instantiate Wait class in order to reach wait_for_elements method
       def wait_for_element(locator, timeout = Config.implicit_wait)
         index = 0
         while locator.is_present? == false

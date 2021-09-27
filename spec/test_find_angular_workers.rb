@@ -1,11 +1,8 @@
-# include Pages
 
 require_relative 'spec_helper'
 require_relative '../locators/home'
 require_relative '../pages/search_list_page'
-# require_relative '../pages/home'
-# require_relative '../utils/assert'
-# require 'yaml'
+
 
 describe('Find Angulars workers in UpWork') do
   before_all do
@@ -30,7 +27,6 @@ describe('Find Angulars workers in UpWork') do
     step("Select Angular professional in search dropdown") do
       @home_page = Home.new
       @home_page.search_for_proffesional("Angular")
-      sleep 5
     end
     step("Parsing first page from search term") do
       @search_list = SearchList.new
@@ -44,7 +40,7 @@ describe('Find Angulars workers in UpWork') do
         value.each do |k, v|
           if k.to_s == "title"
             if v.to_s.include? "Angular"
-              pass_search.push({"title":v})
+              pass_search.push({ "title": v })
             end
           end
         end
@@ -52,8 +48,20 @@ describe('Find Angulars workers in UpWork') do
       if pass_search.count() == 0
         Log.fail("No matching criteria found in search results")
       else
-        Log.pass("Search criteria FOUND in search results on #{pass_search.count()} places" )
+        Log.pass("Search criteria FOUND in search results on #{pass_search.count()} places")
       end
+    end
+    step ("Open random Angular professional profile") do
+      @random_profile = rand(1..10)
+      @search_list.select_freelancer(@random_profile)
+      assert_equal(@search_list.check_back_button_present.to_s, true.to_s)
+      sleep 5
+    end
+    # not working at the moment .. we need to discuss
+    step ("Verify opened freelance profile") do
+      profile_preview = ProfilePage.new
+      @profile_hash = profile_preview.create_hash_for_preview_page
+      Log.info("Profile priview details => #{@profile_hash}")
     end
 
   end

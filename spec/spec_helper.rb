@@ -9,6 +9,8 @@ require_relative '../utils/config'
 require_relative '../utils/assert'
 include Libraries
 
+# FOUND ON INTERNET hooks in Ruby, just added mine loggers
+
 $VERBOSE = nil
 $file = 0
 $test = 0
